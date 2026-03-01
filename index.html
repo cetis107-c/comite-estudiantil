@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comité Estudiantil – CETis 107</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Raleway:wght@400;700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --purple-deep:   #4a2c7a;
+      --purple-mid:    #6347a8;
+      --purple-vivid:  #7b5dc7;
+      --purple-light:  #9b85d4;
+      --purple-pale:   #baaee0;
+      --overlay:       rgba(74, 44, 122, 0.72);
+      --text-white:    #f5f0ff;
+      --text-soft:     rgba(245,240,255,0.75);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      width: 100%; height: 100%;
+      font-family: 'Nunito', sans-serif;
+      color: var(--text-white);
+      overflow-x: hidden;
+    }
+
+    /* ── BACKGROUND SLIDESHOW ── */
+    .bg-slideshow {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+    }
+    .bg-slideshow .slide {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      animation: slideShow 54s infinite;
+      transition: opacity 2s ease-in-out;
+    }
+    .bg-slideshow .slide:nth-child(1)  { background-image: url('img1.jpeg');  animation-delay: 0s; }
+    .bg-slideshow .slide:nth-child(2)  { background-image: url('img2.jpeg');  animation-delay: 6s; }
+    .bg-slideshow .slide:nth-child(3)  { background-image: url('img3.jpeg');  animation-delay: 12s; }
+    .bg-slideshow .slide:nth-child(4)  { background-image: url('img4.jpeg');  animation-delay: 18s; }
+    .bg-slideshow .slide:nth-child(5)  { background-image: url('img5.jpeg');  animation-delay: 24s; }
+    .bg-slideshow .slide:nth-child(6)  { background-image: url('img6.jpeg');  animation-delay: 30s; }
+    .bg-slideshow .slide:nth-child(7)  { background-image: url('img7.jpeg');  animation-delay: 36s; }
+    .bg-slideshow .slide:nth-child(8)  { background-image: url('img8.jpeg');  animation-delay: 42s; }
+    .bg-slideshow .slide:nth-child(9)  { background-image: url('img9.jpeg');  animation-delay: 48s; }
+
+    @keyframes slideShow {
+      0%   { opacity: 0; }
+      5%   { opacity: 1; }
+      16%  { opacity: 1; }
+      22%  { opacity: 0; }
+      100% { opacity: 0; }
+    }
+
+    /* Purple overlay */
+    .bg-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--overlay);
+      z-index: 1;
+    }
+    /* subtle gradient vignette */
+    .bg-overlay::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, transparent 40%, rgba(30,10,60,0.5) 100%);
+    }
+
+    /* ── LAYOUT ── */
+    .page {
+      position: relative;
+      z-index: 2;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    /* ── LOGO ── */
+    .logo-wrap {
+      margin-bottom: 28px;
+      animation: fadeDown 0.9s ease both;
+    }
+    .logo-wrap img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid rgba(255,255,255,0.3);
+      box-shadow: 0 0 40px rgba(123,93,199,0.7), 0 0 80px rgba(99,71,168,0.4);
+      object-fit: cover;
+    }
+
+    /* ── HEADER TEXT ── */
+    .school-tag {
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--purple-pale);
+      margin-bottom: 10px;
+      animation: fadeDown 1s 0.15s ease both;
+    }
+
+    .main-title {
+      font-family: 'Raleway', sans-serif;
+      font-size: clamp(2rem, 6vw, 4rem);
+      font-weight: 900;
+      text-align: center;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+      animation: fadeDown 1s 0.3s ease both;
+      text-shadow: 0 4px 30px rgba(0,0,0,0.4);
+    }
+    .main-title span {
+      color: var(--purple-pale);
+    }
+
+    .subtitle {
+      font-size: clamp(0.95rem, 2vw, 1.15rem);
+      color: var(--text-soft);
+      margin-top: 12px;
+      text-align: center;
+      max-width: 480px;
+      line-height: 1.6;
+      animation: fadeDown 1s 0.45s ease both;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--purple-light), var(--purple-vivid));
+      border-radius: 99px;
+      margin: 28px auto;
+      animation: fadeIn 1s 0.55s ease both;
+    }
+
+    /* ── BUTTONS ── */
+    .btn-group {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeUp 1s 0.65s ease both;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 36px;
+      border-radius: 50px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.12);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .btn:hover::before { opacity: 1; }
+    .btn:hover { transform: translateY(-3px); }
+    .btn:active { transform: translateY(0px); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--purple-mid), var(--purple-deep));
+      color: #fff;
+      border: 2px solid rgba(255,255,255,0.25);
+      box-shadow: 0 8px 32px rgba(74,44,122,0.5);
+    }
+    .btn-primary:hover {
+      box-shadow: 0 12px 40px rgba(99,71,168,0.7);
+    }
+
+    .btn-accent {
+      background: linear-gradient(135deg, var(--purple-vivid), var(--purple-mid));
+      color: #fff;
+      border: 2px solid rgba(255,255,255,0.25);
+      box-shadow: 0 8px 32px rgba(123,93,199,0.5);
+    }
+    .btn-accent:hover {
+      box-shadow: 0 12px 40px rgba(123,93,199,0.75);
+    }
+
+    .btn svg { flex-shrink: 0; }
+
+    /* ── INSTAGRAM BADGE ── */
+    .ig-badge {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(74,44,122,0.75);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 50px;
+      padding: 10px 18px 10px 12px;
+      text-decoration: none;
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 700;
+      transition: transform 0.2s, background 0.2s;
+      box-shadow: 0 4px 24px rgba(30,10,60,0.4);
+      animation: fadeIn 1s 1s ease both;
+    }
+    .ig-badge:hover {
+      transform: scale(1.05);
+      background: rgba(99,71,168,0.85);
+    }
+    .ig-icon {
+      width: 30px; height: 30px;
+      flex-shrink: 0;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    /* ── DECORATIVE RING ── */
+    .ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.06);
+      pointer-events: none;
+    }
+    .ring-1 { width: 500px; height: 500px; top: -150px; left: -200px; }
+    .ring-2 { width: 340px; height: 340px; bottom: -80px; right: -100px; }
+    .ring-3 { width: 220px; height: 220px; bottom: 60px; left: 40px; }
+
+    @media (max-width: 480px) {
+      .btn { padding: 13px 26px; font-size: 0.93rem; }
+      .ig-badge { bottom: 16px; right: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background slideshow -->
+  <div class="bg-slideshow">
+    <div class="slide"></div>
+    <div class="slide"></div>
+    <div class="slide"></div>
+    <div class="slide"></div>
+    <div class="slide"></div>
+    <div class="slide"></div>
+    <div class="slide"></div>
+    <div class="slide"></div>
+    <div class="slide"></div>
+  </div>
+  <div class="bg-overlay"></div>
+
+  <!-- Main content -->
+  <main class="page">
+    <!-- Decorative rings -->
+    <div class="ring ring-1"></div>
+    <div class="ring ring-2"></div>
+    <div class="ring ring-3"></div>
+
+    <!-- Logo -->
+    <div class="logo-wrap">
+      <img src="img-logo.png" alt="Logo Comité Estudiantil CETis 107" />
+    </div>
+
+    <!-- Heading -->
+    <p class="school-tag">CETis No. 107 &nbsp;·&nbsp; Comité Estudiantil</p>
+
+    <h1 class="main-title">
+      Vota por la<br /><span>Temática</span>
+    </h1>
+
+    <p class="subtitle">
+      Tu voz decide el rumbo. Revisa las propuestas del comité y elige la temática que marcará este ciclo.
+    </p>
+
+    <div class="divider"></div>
+
+    <!-- Buttons -->
+    <div class="btn-group">
+      <a href="propuestas.html" class="btn btn-primary">
+        <!-- document icon -->
+        <svg class="btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+          <polyline points="14 2 14 8 20 8"/>
+          <line x1="16" y1="13" x2="8" y2="13"/>
+          <line x1="16" y1="17" x2="8" y2="17"/>
+          <polyline points="10 9 9 9 8 9"/>
+        </svg>
+        Ver Propuestas
+      </a>
+
+      <a href="forms.html" class="btn btn-accent">
+        <!-- check / vote icon -->
+        <svg class="btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+        Votar Ahora
+      </a>
+    </div>
+  </main>
+
+  <!-- Instagram badge -->
+  <a href="https://www.instagram.com/_comiteestudiantil" target="_blank" rel="noopener" class="ig-badge" aria-label="Síguenos en Instagram">
+    <!-- Instagram SVG icon -->
+    <svg class="ig-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="ig-grad" cx="30%" cy="107%" r="130%">
+          <stop offset="0%" stop-color="#ffd676"/>
+          <stop offset="25%" stop-color="#f9a241"/>
+          <stop offset="50%" stop-color="#e4405f"/>
+          <stop offset="75%" stop-color="#c13584"/>
+          <stop offset="100%" stop-color="#833ab4"/>
+        </radialGradient>
+      </defs>
+      <rect width="48" height="48" rx="12" fill="url(#ig-grad)"/>
+      <rect x="13" y="13" width="22" height="22" rx="6" stroke="white" stroke-width="2.5" fill="none"/>
+      <circle cx="24" cy="24" r="5.5" stroke="white" stroke-width="2.5" fill="none"/>
+      <circle cx="31.5" cy="16.5" r="1.5" fill="white"/>
+    </svg>
+    @_comiteestudiantil
+  </a>
+
+</body>
+</html>
